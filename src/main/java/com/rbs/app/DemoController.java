@@ -13,9 +13,17 @@ public class DemoController {
     @Value("${app.config.message}")
     String message;
 
+    @Value("${app.env.message}")
+    String envMessage;
+
     @GetMapping("/app")
     public String getByAppProperties(){
         return message;
     }
 
+
+    @GetMapping("/env")
+    public String getEnvMessage() {
+        return envMessage;
+    }
 }
