@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh script: 'docker push eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one:$(cat version)', label: 'Pushing version into registry'
                 sh script: 'docker push eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one:latest', label: 'Pushing latest into registry'
-                sh script: 'docker rmi -f eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one:$(cat version)' eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one:latest', label: 'Image clean up'
+                sh script: 'docker rmi -f eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one:latest eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one:$(cat version)', label: 'Image clean up'
             }
         }
     }
