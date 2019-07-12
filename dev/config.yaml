@@ -5,7 +5,7 @@ metadata:
   namespace: dev
 data:
   env_msg: |
-    This is dev app one
+    This is dev app one...!! Dev is different then QA !!
   my-nginx-config.conf: |
     server {
       listen        80;
