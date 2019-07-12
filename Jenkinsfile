@@ -34,7 +34,7 @@ pipeline {
         stage('Invoke Infra'){
             agent any
             steps {
-                build job: 'rbs-app-one-infra', wait: false, propagate: true, string(name: version, value: $(cat version))
+                build job: 'rbs-app-one-infra', wait: false, propagate: true, parameters: [string(name: 'version', value: "$(cat version)")]
             }
         }
     }
