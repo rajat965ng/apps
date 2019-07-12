@@ -1,1 +1,0 @@
-sed -i  s/tag_version/`openssl rand -hex 3`/g prod/deployment.yaml qa/deployment.yaml dev/deployment.yaml
