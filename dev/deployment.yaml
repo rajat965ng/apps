@@ -12,7 +12,7 @@ spec:
       labels:
         app: app-one
       annotations:
-        version: tag_version
+        version: "tag_version"
     spec:
       volumes:
       - name: config
