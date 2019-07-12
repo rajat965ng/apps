@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-one
+  namespace: prod
+spec:
+  selector:
+    matchLabels:
+      app: app-one
+  template:
+    metadata:
+      labels:
+        app: app-one
+    spec:
+      volumes:
+      - name: config
+        configMap:
+          name: app-one
+          items:
+          - key: my-nginx-config.conf
+            path: https.conf
+      - name: certs
+        secret:
+          secretName: app-one
+      containers:
+      - name: app
+        image: eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ENV_MSG
+          valueFrom:
+            configMapKeyRef:
+              key: env_msg
+              name: app-one
+      - name: web-server
+        image: nginx:alpine
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: config
+          readOnly: true
+        - mountPath: /etc/nginx/certs/
+          name: certs
+          readOnly: true
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-one
+  namespace: prod
+spec:
+  selector:
+    app: app-one
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-one-svc
+  namespace: prod
+spec:
+  type: LoadBalancer
+  selector:
+    app: app-one
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    targetPort: 443
+    protocol: TCP
+    name: https
