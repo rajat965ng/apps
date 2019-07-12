@@ -5,7 +5,7 @@ metadata:
   namespace: prod
 data:
   env_msg: |
-    This is prod app one
+    This is prod app one.....add some more text !!
   my-nginx-config.conf: |
     server {
       listen        80;
