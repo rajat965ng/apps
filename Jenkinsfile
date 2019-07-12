@@ -31,11 +31,5 @@ pipeline {
                 sh script: 'docker rmi -f eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one:latest eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one:$(cat version)', label: 'Image clean up'
             }
         }
-        stage('Invoke Infra'){
-            agent any
-            steps {
-                build job: 'rbs-app-one-infra', wait: true, propagate: true, parameters: [string(name: 'version', value: "${`cat version`}")]
-            }
-        }
     }
 }
