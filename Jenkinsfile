@@ -4,6 +4,7 @@ pipeline {
         stage('Deployment Token Refresh'){
             agent any
             steps {
+                sh script: 'sh -x version.sh', label: 'Tag Deployment Version'
                 sh script: 'docker login -u oauth2accesstoken -p "$(docker run eu.gcr.io/sape-rbs-gcp-poc/util gcloud auth print-access-token)" https://eu.gcr.io'
             }
         }
