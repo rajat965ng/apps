@@ -17,6 +17,11 @@ pipeline {
                 sh script: 'docker build -t eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one:$(cat version) -t eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one:latest .', label: 'Creating  Image'
             }
         }
+        stage('Deployment Token Refresh'){
+            agent any
+            steps {
+                sh script: 'docker login -u oauth2accesstoken -p "$(docker run eu.gcr.io/sape-rbs-gcp-poc/util gcloud auth print-access-token)" https://eu.gcr.io'
+            }
         stage('Publish'){
             agent any
             steps {
