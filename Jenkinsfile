@@ -28,7 +28,7 @@ pipeline {
         stage('Production Deploy'){
             agent any
             steps {
-                sh script: 'sed -i  s/tag_version/params['version']/g prod/deployment.yaml'
+                sh script: 'sed -i  s/tag_version/${params.version}/g prod/deployment.yaml'
                 sh script: 'docker run  -v $PWD:/app -w /app eu.gcr.io/sape-rbs-gcp-poc/util kubectl apply -f prod/namespace.yaml', label: 'Configure Namespace'
                 sh script: 'docker run  -v $PWD:/app -w /app eu.gcr.io/sape-rbs-gcp-poc/util kubectl apply -f prod/config.yaml', label: 'Deploy ConfigMap and Secrets'
                 sh script: 'docker run  -v $PWD:/app -w /app eu.gcr.io/sape-rbs-gcp-poc/util kubectl apply -f prod/deployment.yaml', label: 'Execute Deployment'
