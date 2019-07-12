@@ -8,9 +8,7 @@ pipeline {
             }
         }
         stage('Development Deploy') {
-            agent {
-                docker any
-            }
+            agent any
             steps {
                 sh script: 'docker run --rm  -it -v $PWD:/app -w /app eu.gcr.io/sape-rbs-gcp-poc/util kubectl apply -f dev/namespace.yaml', label: 'Configure Namespace'
                 sh script: 'docker run --rm  -it -v $PWD:/app -w /app eu.gcr.io/sape-rbs-gcp-poc/util kubectl apply -f dev/config.yaml', label: 'Deploy ConfigMap and Secrets'
@@ -18,9 +16,7 @@ pipeline {
             }
         }
         stage('QA Deploy') {
-            agent {
-                docker any
-            }
+            agent any
             steps {
                 sh script: 'docker run --rm  -it -v $PWD:/app -w /app eu.gcr.io/sape-rbs-gcp-poc/util kubectl apply -f qa/namespace.yaml', label: 'Configure Namespace'
                 sh script: 'docker run --rm  -it -v $PWD:/app -w /app eu.gcr.io/sape-rbs-gcp-poc/util kubectl apply -f qa/config.yaml', label: 'Deploy ConfigMap and Secrets'
@@ -28,9 +24,7 @@ pipeline {
             }
         }
         stage('Production Deploy'){
-            agent {
-                docker any
-            }
+            agent any
             steps {
                 sh script: 'docker run --rm  -it -v $PWD:/app -w /app eu.gcr.io/sape-rbs-gcp-poc/util kubectl apply -f prod/namespace.yaml', label: 'Configure Namespace'
                 sh script: 'docker run --rm  -it -v $PWD:/app -w /app eu.gcr.io/sape-rbs-gcp-poc/util kubectl apply -f prod/config.yaml', label: 'Deploy ConfigMap and Secrets'
