@@ -22,3 +22,6 @@
   - I believe there were some lifecycle issues with Spring and the EntityManagerFactory, and you might have fallen foul of those (fixed in 4.0.0.RC1) - if your @Configuration class gets instantiated super early, it might not be eligible for autowiring. You can probably tell from the log output if that is the case.
   - Just out of interest, did you know that the functionality provided by your JpaConfig and PropertyConfig is already presetn out of the box if you use @EnableAutoConfiguration (as long as you @ComponentScan that package where your repositories are defined)? 
   
+- To access host machine from the docker container you must attach an IP alias to your network 
+  - docker.for.mac.host.internal  [Docker for Mac v 17.12 to v 18.02]
+  - docker.for.mac.localhost  [Docker for Mac v 17.06 to v 17.11]
