@@ -25,17 +25,6 @@ spec:
         secret:
           secretName: app-one
       containers:
-      - name: app
-        image: eu.gcr.io/sape-rbs-gcp-poc/rbs-app-one
-        imagePullPolicy: "Always"
-        ports:
-        - containerPort: 8080
-        env:
-        - name: ENV_MSG
-          valueFrom:
-            configMapKeyRef:
-              key: env_msg
-              name: app-one
       - name: web-server
         image: nginx:alpine
         volumeMounts:
