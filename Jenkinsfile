@@ -2,8 +2,7 @@ pipeline {
     agent none
     stages {
         stage('Development Deploy') {
-            agent any
-            steps {
+            withKubeConfig([credentialsId: 'jenkins', serverUrl: 'https://10.0.0.4:6443']){
                 echo "${params.version} the version"
                 sh script: 'kubectl get nodes', label: 'get nodes'
                 sh script: 'sed -i  s/tag_version/`openssl rand -hex 3`/g dev/deployment.yaml'
