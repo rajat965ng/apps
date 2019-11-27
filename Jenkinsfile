@@ -4,6 +4,7 @@ pipeline {
         stage('Development Deploy') {
             agent any
             steps {
+                echo $USER
                 echo "${params.version} the version"
                 sh script: 'kubectl get nodes', label: 'Configure Namespace'
                 sh script: 'sed -i  s/tag_version/`openssl rand -hex 3`/g dev/deployment.yaml'
