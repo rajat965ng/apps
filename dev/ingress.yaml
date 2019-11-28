@@ -1,8 +1,7 @@
 kind: Ingress
 apiVersion: extensions/v1beta1
 metadata:
-  name: dev-ingress
-  namespace: dev
+  name: test-ingress
 spec:
   rules:
   - http:
