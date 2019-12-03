@@ -6,7 +6,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /service/*
+      - path: /dev/*
         backend:
           serviceName: app-one
           servicePort: 80
