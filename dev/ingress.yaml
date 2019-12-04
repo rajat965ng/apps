@@ -1,12 +1,12 @@
 kind: Ingress
 apiVersion: extensions/v1beta1
 metadata:
-  name: test-ingress
+  name: backend-ingress
 spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /backend
         backend:
-          serviceName: app-one
+          serviceName: app-one-backend
           servicePort: 80
