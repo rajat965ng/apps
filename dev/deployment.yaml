@@ -42,7 +42,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /service
+      - path: /test
         backend:
           serviceName: app-one-backend
           servicePort: 80
