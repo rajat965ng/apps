@@ -33,3 +33,18 @@ spec:
   - port: 80
     targetPort: 80
     protocol: TCP
+
+---
+
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: client-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: app-one
+          servicePort: 80
